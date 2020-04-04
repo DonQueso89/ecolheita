@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+    db:
+        image: postgres:12.2-alpine
+        volumes:
+            - ./init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        env_file:
+            - .env
+        networks:
+            - ecolheita
+
+    api:
+        build:
+            context: .
+            args:
+                # these should match the gid and uid you use to develop
+                USER_ID: 1000
+                GROUP_ID: 1000
+        image: ecolheita_api
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./ecolheita:/app
+            - ./pytest.ini:/pytest.ini
+        environment:
+            DJANGO_SECRET_KEY: local
+        env_file:
+            - .env
+        networks:
+            - ecolheita
+        depends_on:
+            - db
+        tty: true 
+        stdin_open: true
+
+networks:
+    ecolheita:
+        name: "ecolheita"
