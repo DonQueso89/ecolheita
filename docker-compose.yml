@@ -24,7 +24,7 @@ services:
         ports:
             - "8080:8080"
         volumes:
-            - ./ecolheita:/app
+            - ./server:/app
             - ./pytest.ini:/pytest.ini
         environment:
             DJANGO_SECRET_KEY: local
