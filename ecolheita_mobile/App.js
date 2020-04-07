@@ -1,30 +1,91 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { ImageBackground } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import HomeView from './src/components/HomeView.jsx'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Ionicons } from '@expo/vector-icons'
+
+const Tab = createBottomTabNavigator()
+
+function OrdersView() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 20, color: '#000' }}>
+        Aqui se pode ver as lojas e procurar cestas
+      </Text>
+    </View>
+  )
+}
+
+function ProfileView() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 20, color: '#000' }}>
+        Aqui se pode configurar o perfil do usuario
+      </Text>
+    </View>
+  )
+}
+
+function MapView() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 20, color: '#000' }}>
+        Aqui se pode ver as lojas guardadas como favorito
+      </Text>
+    </View>
+  )
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
       <ImageBackground
         source={require('./assets/logo.png')}
         style={styles.logo}
       />
-      <TouchableOpacity
-        onPress={() => alert('Vamos procurar!!')}
-        style={styles.navButton}>
-        <Text style={{ fontSize: 20, color: '#fff' }}>Procurar cestas</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => alert('Aqui podes fazer configuracoes')}
-        style={styles.navButton}>
-        <Text style={{ fontSize: 20, color: '#fff' }}>Meu perfil</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => alert('Um atalho para tuas lojas favoritas')}
-        style={styles.navButton}>
-        <Text style={{ fontSize: 20, color: '#fff' }}>Favoritos</Text>
-      </TouchableOpacity>
-    </View>
+      <Tab.Navigator
+        initialRouteName="Home"
+        tabBarOptions={{
+          activeTintColor: 'black',
+          activeBackgroundColor: 'lightgray',
+        }}>
+        <Tab.Screen
+          name="Home"
+          component={HomeView}
+          options={{
+            title: 'Inicio',
+            tabBarIcon: () => <Ionicons name="md-home" size={30} />,
+          }}
+        />
+        <Tab.Screen
+          name="Search"
+          component={MapView}
+          options={{
+            title: 'Busca',
+            tabBarIcon: () => <Ionicons name="md-search" size={30} />,
+          }}
+        />
+        <Tab.Screen
+          name="Orders"
+          component={OrdersView}
+          options={{
+            title: 'Pedidos',
+            tabBarIcon: () => <Ionicons name="md-basket" size={30} />,
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileView}
+          options={{
+            title: 'Perfil',
+            tabBarIcon: () => <Ionicons name="md-options" size={30} />,
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   )
 }
 
@@ -47,5 +108,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 5,
     padding: 20,
+  },
+  nego: {
+    width: 380,
+    height: 500,
+  },
+  tab: {
+    fontSize: 50,
   },
 })
