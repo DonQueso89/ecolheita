@@ -24,6 +24,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": ""
+    "description": "Pllataforma contra o desperdicio e para a comunidade",
+    "githubUrl": "https://github.com/DonQueso89/ecolheita/tree/master/ecolheita_mobile"
   }
 }

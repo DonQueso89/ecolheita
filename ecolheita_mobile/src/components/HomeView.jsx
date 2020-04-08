@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, ScrollView, View, FlatList, TouchableOpacity } from 'react-native'
+import { SearchBar } from 'react-native-elements';
+import { connect } from "react-redux"
 
 
-function SearchBar(props) {
+function Search(props) {
     const [query, setQuery] = useState("");
-    return <TextInput placeholder={"Entra prato ou loja"} style={styles.searchBar}/>
+    return <SearchBar
+        placeholder="Entra prato ou loja"
+        onChangeText={setQuery}
+        value={query}
+        style={props.style}
+      />
 }
 
 
@@ -36,7 +43,7 @@ export default function HomeView({ navigation }) {
 
   return (
       <>
-    <SearchBar style={{backgroundColor: '#fa5'}} />
+    <Search style={{backgroundColor: '#fa5'}} />
       <View style={{height: 100}}>
     <ScrollView contentContainerStyle={{...styles.vendorScroller}} horizontal={true}>
       {vendors}
@@ -50,6 +57,12 @@ export default function HomeView({ navigation }) {
       </>
   )
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    vendors: state.vendors
+})
+
+connect(mapStateToProps)(HomeView)
 
 const styles = StyleSheet.create({
   container: {
