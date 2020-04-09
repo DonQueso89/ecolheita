@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, ScrollView, View, FlatList, TouchableOpacity } from 'react-native'
 import { SearchBar } from 'react-native-elements';
 import { connect } from "react-redux"
+import { actions } from "../store.js"
 
 
 function Search(props) {
-    const [query, setQuery] = useState("");
     return <SearchBar
         placeholder="Entra prato ou loja"
-        onChangeText={setQuery}
-        value={query}
+        onChangeText={props.setOfferQuery}
+        value={props.offerQuery}
         style={props.style}
       />
 }
@@ -26,49 +26,54 @@ function Vendor(props) {
     /*
      * name logo
      */
-    return <TouchableOpacity style={props.style}><Text>Comercio {props.number}</Text></TouchableOpacity>
+    return <TouchableOpacity style={props.style}><Text>{"Comercio" + props.number}</Text></TouchableOpacity>
 }
 
-export default function HomeView({ navigation }) {
-  const vendors = [0, 1, 2, 3, 4, 5].map((i) => <Vendor style={styles.navButton} number={i}/>)
-  const offers = [
-    "prato delicioso",
-    "farofa",
-    "mais farofa",
-    "pratissimo",
-    "muito bom",
-    "sabor maluco",
-    "feijoada q sobrou"
-  ]
-
+function HomeView(props) {
   return (
       <>
-    <Search style={{backgroundColor: '#fa5'}} />
-      <View style={{height: 100}}>
-    <ScrollView contentContainerStyle={{...styles.vendorScroller}} horizontal={true}>
-      {vendors}
-      </ScrollView>
+    <Search style={{backgroundColor: '#fa5'}} {...props} />
+      <View style={styles.vendorContainer}>
+
+    <FlatList
+      data={props.vendors}
+      renderItem={({item}) => <Vendor style={styles.vendor} number={item}/>} 
+      horizontal={true}
+        />
       </View>
       <View style={styles.container}>
     <FlatList
-      data={offers}
-      renderItem={({item}) => <Offer style={styles.navButton} name={item}/>} />
+      data={props.offerQuery.length ? props.offers.filter(x => x.toLowerCase().includes(props.offerQuery.toLowerCase())) : props.offers}
+      renderItem={({item}) => <Offer style={styles.navButton} name={item}  />} />
       </View>
       </>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    vendors: state.vendors
+    vendors: state.vendors,
+    offers: state.offers.data,
+    offerQuery: state.offers.query
 })
 
-connect(mapStateToProps)(HomeView)
+const mapDispatchToProps = { 
+    addVendors: actions.addVendors,
+    resetVendors: actions.resetVendors,
+    setOfferQuery: actions.setOfferQuery
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fa5',
     justifyContent: 'flex-start',
+  },
+  vendorContainer: {
+    backgroundColor: '#fa5',
+    justifyContent: 'flex-start',
+    height: 80
   },
   navButton: {
     backgroundColor: '#a50',
@@ -92,7 +97,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fa5'
   },
   vendor: {
-    padding: 2,
-    borderRadius: 5
+    backgroundColor: '#a50',
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderRadius: 5,
+    padding: 20,
+    borderColor: "red",
+    height: 80
   }
 })
