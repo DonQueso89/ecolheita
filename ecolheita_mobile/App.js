@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 380,
-    height: 100,
+    height: 80,
   },
   titleText: {
     fontSize: 20,
@@ -112,10 +112,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 5,
     padding: 20,
-  },
-  nego: {
-    width: 380,
-    height: 500,
   },
   tab: {
     fontSize: 50,

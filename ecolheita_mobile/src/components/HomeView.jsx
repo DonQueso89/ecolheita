@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, ScrollView, View, FlatList, TouchableOpacity } from 'react-native'
 import { SearchBar } from 'react-native-elements';
 import { connect } from "react-redux"
-import { actions } from "../store.js"
+import { add as addVendors, reset as resetVendors, setQuery as setVendorQuery  } from "../features/vendors/vendorSlice.js"
 
 
 function Search(props) {
     return <SearchBar
         placeholder="Entra prato ou loja"
-        onChangeText={props.setOfferQuery}
-        value={props.offerQuery}
+        onChangeText={props.setVendorQuery}
+        value={props.vendorQuery}
         style={props.style}
       />
 }
@@ -26,40 +26,31 @@ function Vendor(props) {
     /*
      * name logo
      */
-    return <TouchableOpacity style={props.style}><Text>{"Comercio" + props.number}</Text></TouchableOpacity>
+    return <TouchableOpacity style={props.style}><Text>{"Comercio " + props.name}</Text></TouchableOpacity>
 }
 
 function HomeView(props) {
   return (
       <>
     <Search style={{backgroundColor: '#fa5'}} {...props} />
-      <View style={styles.vendorContainer}>
-
-    <FlatList
-      data={props.vendors}
-      renderItem={({item}) => <Vendor style={styles.vendor} number={item}/>} 
-      horizontal={true}
-        />
-      </View>
       <View style={styles.container}>
     <FlatList
-      data={props.offerQuery.length ? props.offers.filter(x => x.toLowerCase().includes(props.offerQuery.toLowerCase())) : props.offers}
-      renderItem={({item}) => <Offer style={styles.navButton} name={item}  />} />
+      data={props.vendorQuery.length ? props.vendors.filter(x => x.toLowerCase().includes(props.vendorQuery.toLowerCase())) : props.vendors}
+      renderItem={({item}) => <Vendor style={styles.navButton} name={item}  />} />
       </View>
       </>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    vendors: state.vendors,
-    offers: state.offers.data,
-    offerQuery: state.offers.query
+    vendors: state.vendors.data,
+    vendorQuery: state.vendors.query
 })
 
 const mapDispatchToProps = { 
-    addVendors: actions.addVendors,
-    resetVendors: actions.resetVendors,
-    setOfferQuery: actions.setOfferQuery
+    addVendors: addVendors,
+    resetVendors: resetVendors,
+    setVendorQuery: setVendorQuery
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
