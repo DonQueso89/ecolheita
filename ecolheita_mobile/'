@@ -96,19 +96,9 @@ function HomeView(props) {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.searchAndFilter}>
-          <SearchBar
-            placeholder="Nome do comercio"
-            onChangeText={props.setVendorQuery}
-            value={props.vendorQuery}
-            containerStyle={{ flex: 7 }}
-            platform="ios"></SearchBar>
-          <Ionicons
-            name="md-options"
-            size={40}
-            style={{ flex: 1, paddingVertical: 10 }}
-            onPress={() => props.navigation.navigate('GlobalFilterModal')}
-          />
+        <View style={{ flex: 1 }}>
+          <Search style={{ backgroundColor: '#fa5' }} {...props}></Search>
+          <Ionicons name="md-options" size={30} />
         </View>
         <View style={styles.vendorList}>
           <FlatList
@@ -149,6 +139,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fa5',
     justifyContent: 'flex-start',
+    margin: 0
   },
   vendorContainer: {
     backgroundColor: '#fa5',
@@ -187,9 +178,5 @@ const styles = StyleSheet.create({
   },
   vendorList: {
     flex: 6,
-  },
-  searchAndFilter: {
-    flex: 1,
-    flexDirection: 'row',
   },
 })

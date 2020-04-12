@@ -9,7 +9,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appicon.png",
     "splash": {
       "image": "./assets/logo.png",
       "resizeMode": "contain",
@@ -25,6 +25,7 @@
       "supportsTablet": true
     },
     "description": "Pllataforma contra o desperdicio e para a comunidade",
-    "githubUrl": "https://github.com/DonQueso89/ecolheita/tree/master/ecolheita_mobile"
+    "githubUrl": "https://github.com/DonQueso89/ecolheita/tree/master/ecolheita_mobile",
+    "privacy": "public"
   }
 }

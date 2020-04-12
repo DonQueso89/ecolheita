@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { ImageBackground } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -8,8 +8,6 @@ import HomeView from './src/components/HomeView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import store from './src/store'
-
-const Tab = createBottomTabNavigator()
 
 function OrdersView() {
   return (
@@ -41,6 +39,63 @@ function MapView() {
   )
 }
 
+const HomeNavTab = createBottomTabNavigator()
+
+function MainTabScreen() {
+  return (
+    <HomeNavTab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{
+        activeTintColor: 'black',
+        activeBackgroundColor: 'lightgray',
+      }}>
+      <HomeNavTab.Screen
+        name="Home"
+        component={HomeView}
+        options={{
+          title: 'Inicio',
+          tabBarIcon: () => <Ionicons name="md-home" size={30} />,
+        }}
+      />
+      <HomeNavTab.Screen
+        name="Map"
+        component={MapView}
+        options={{
+          title: 'Mapa',
+          tabBarIcon: () => <Ionicons name="md-map" size={30} />,
+        }}
+      />
+      <HomeNavTab.Screen
+        name="Orders"
+        component={OrdersView}
+        options={{
+          title: 'Favorites',
+          tabBarIcon: () => <Ionicons name="md-heart" size={30} />,
+        }}
+      />
+      <HomeNavTab.Screen
+        name="Profile"
+        component={ProfileView}
+        options={{
+          title: 'Perfil',
+          tabBarIcon: () => <Ionicons name="md-options" size={30} />,
+        }}
+      />
+    </HomeNavTab.Navigator>
+  )
+}
+
+const RootStack = createStackNavigator()
+
+function GlobalFilterModal({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 30 }}>Filtros Globais</Text>
+      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+    </View>
+  )
+}
+
 export default function App() {
   return (
     <Provider store={store}>
@@ -49,45 +104,17 @@ export default function App() {
           source={require('./assets/logo.png')}
           style={styles.logo}
         />
-        <Tab.Navigator
-          initialRouteName="Home"
-          tabBarOptions={{
-            activeTintColor: 'black',
-            activeBackgroundColor: 'lightgray',
-          }}>
-          <Tab.Screen
-            name="Home"
-            component={HomeView}
-            options={{
-              title: 'Inicio',
-              tabBarIcon: () => <Ionicons name="md-home" size={30} />,
-            }}
+        <RootStack.Navigator mode="modal" initialRouteName="Main">
+          <RootStack.Screen
+            name="Main"
+            component={MainTabScreen}
+            options={{ headerShown: false }}
           />
-          <Tab.Screen
-            name="Search"
-            component={MapView}
-            options={{
-              title: 'Busca',
-              tabBarIcon: () => <Ionicons name="md-search" size={30} />,
-            }}
+          <RootStack.Screen
+            name="GlobalFilterModal"
+            component={GlobalFilterModal} // Nested navigate actions bubble up here
           />
-          <Tab.Screen
-            name="Orders"
-            component={OrdersView}
-            options={{
-              title: 'Pedidos',
-              tabBarIcon: () => <Ionicons name="md-basket" size={30} />,
-            }}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={ProfileView}
-            options={{
-              title: 'Perfil',
-              tabBarIcon: () => <Ionicons name="md-options" size={30} />,
-            }}
-          />
-        </Tab.Navigator>
+        </RootStack.Navigator>
       </NavigationContainer>
     </Provider>
   )
