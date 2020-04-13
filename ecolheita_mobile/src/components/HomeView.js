@@ -106,7 +106,7 @@ function HomeView(props) {
           <Ionicons
             name="md-options"
             size={40}
-            style={{ flex: 1, paddingVertical: 10 }}
+            style={{ flex: 1, paddingVertical: 17 }}
             onPress={() => props.navigation.navigate('GlobalFilterModal')}
           />
         </View>
@@ -168,8 +168,6 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
-    margin: 5,
-    padding: 5,
     backgroundColor: 'lightgray',
   },
   vendorScroller: {
@@ -191,5 +189,6 @@ const styles = StyleSheet.create({
   searchAndFilter: {
     flex: 1,
     flexDirection: 'row',
+    backgroundColor: 'rgb(245, 245, 245)',
   },
 })

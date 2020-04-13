@@ -5,6 +5,7 @@ import { ImageBackground } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeView from './src/components/HomeView'
+import MiscView from './src/components/MiscView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import store from './src/store'
@@ -14,16 +15,6 @@ function OrdersView() {
     <View style={styles.container}>
       <Text style={{ fontSize: 20, color: '#000' }}>
         Aqui se pode ver as lojas e procurar cestas
-      </Text>
-    </View>
-  )
-}
-
-function ProfileView() {
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 20, color: '#000' }}>
-        Aqui se pode configurar o perfil do usuario
       </Text>
     </View>
   )
@@ -74,8 +65,8 @@ function MainTabScreen() {
         }}
       />
       <HomeNavTab.Screen
-        name="Profile"
-        component={ProfileView}
+        name="Misc"
+        component={MiscView}
         options={{
           title: 'Perfil',
           tabBarIcon: () => <Ionicons name="md-options" size={30} />,
