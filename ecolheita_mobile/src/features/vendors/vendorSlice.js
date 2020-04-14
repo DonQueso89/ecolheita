@@ -5,6 +5,7 @@ const vendorSlice = createSlice({
   initialState: {
     data: [
       {
+        _id: 0,
         name: 'O Italiano maluco',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),
@@ -15,6 +16,7 @@ const vendorSlice = createSlice({
         numLeft: 5,
       },
       {
+        _id: 1,
         name: 'Frango doido',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),
@@ -25,6 +27,7 @@ const vendorSlice = createSlice({
         numLeft: 8,
       },
       {
+        _id: 2,
         name: 'Pratos e gatos',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),
@@ -35,6 +38,7 @@ const vendorSlice = createSlice({
         numLeft: 11,
       },
       {
+        _id: 3,
         name: 'Restaurante doido',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),
@@ -45,6 +49,7 @@ const vendorSlice = createSlice({
         numLeft: 2,
       },
       {
+        _id: 4,
         name: 'Farofa da vovo',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),
@@ -55,6 +60,7 @@ const vendorSlice = createSlice({
         numLeft: 3,
       },
       {
+        _id: 5,
         name: 'Fritissimo',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),
@@ -65,6 +71,7 @@ const vendorSlice = createSlice({
         numLeft: 3,
       },
       {
+        _id: 6,
         name: 'Sabor do campo',
         openFrom: new Date().toTimeString().slice(0, 5),
         openUntil: new Date().toTimeString().slice(0, 5),

@@ -1,40 +1,16 @@
 import React from 'react'
-import MapView from 'react-native-maps'
 import { Provider } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { ImageBackground } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import HomeView from './src/components/HomeView'
-import MiscView from './src/components/MiscView'
+import HomeView from './src/containers/HomeView'
+import MiscView from './src/containers/MiscView'
+import MapView from './src/containers/MapView'
+import FavoritesView from './src/containers/FavoritesView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import store from './src/store'
-
-function OrdersView() {
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 20, color: '#000' }}>
-        Aqui se pode ver as lojas e procurar cestas
-      </Text>
-    </View>
-  )
-}
-
-function EcolheitaMapView() {
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        region={{
-          latitude: -24.799791,
-          longitude: -50.0014762,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
-        }}></MapView>
-    </View>
-  )
-}
 
 const HomeNavTab = createBottomTabNavigator()
 
@@ -56,17 +32,17 @@ function MainTabScreen() {
       />
       <HomeNavTab.Screen
         name="Map"
-        component={EcolheitaMapView}
+        component={MapView}
         options={{
           title: 'Mapa',
           tabBarIcon: () => <Ionicons name="md-map" size={30} />,
         }}
       />
       <HomeNavTab.Screen
-        name="Orders"
-        component={OrdersView}
+        name="Favorites"
+        component={FavoritesView}
         options={{
-          title: 'Favorites',
+          title: 'Favoritos',
           tabBarIcon: () => <Ionicons name="md-heart" size={30} />,
         }}
       />
