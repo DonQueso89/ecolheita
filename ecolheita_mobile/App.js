@@ -1,4 +1,5 @@
 import React from 'react'
+import MapView from 'react-native-maps'
 import { Provider } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { ImageBackground } from 'react-native'
@@ -20,12 +21,17 @@ function OrdersView() {
   )
 }
 
-function MapView() {
+function EcolheitaMapView() {
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, color: '#000' }}>
-        Aqui se pode ver as lojas guardadas como favorito
-      </Text>
+      <MapView
+        style={styles.map}
+        region={{
+          latitude: -24.799791,
+          longitude: -50.0014762,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        }}></MapView>
     </View>
   )
 }
@@ -50,7 +56,7 @@ function MainTabScreen() {
       />
       <HomeNavTab.Screen
         name="Map"
-        component={MapView}
+        component={EcolheitaMapView}
         options={{
           title: 'Mapa',
           tabBarIcon: () => <Ionicons name="md-map" size={30} />,
@@ -133,5 +139,8 @@ const styles = StyleSheet.create({
   },
   tab: {
     fontSize: 50,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
   },
 })
