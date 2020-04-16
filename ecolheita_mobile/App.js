@@ -11,6 +11,7 @@ import FavoritesView from './src/containers/FavoritesView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import store from './src/store'
+import GlobalFilterModal from './src/containers/GlobalFilterView'
 
 const HomeNavTab = createBottomTabNavigator()
 
@@ -60,15 +61,6 @@ function MainTabScreen() {
 
 const RootStack = createStackNavigator()
 
-function GlobalFilterModal({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>Filtros Globais</Text>
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
-    </View>
-  )
-}
-
 export default function App() {
   return (
     <Provider store={store}>
@@ -77,7 +69,23 @@ export default function App() {
           source={require('./assets/logo.png')}
           style={styles.logo}
         />
-        <RootStack.Navigator mode="modal" initialRouteName="Main">
+        <RootStack.Navigator
+          mode="modal"
+          initialRouteName="Main"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#fa5',
+            },
+            headerTintColor: '#282',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerShown: false,
+            cardStyle: {
+              backgroundColor: 'transparent',
+              opacity: 0.9,
+            },
+          }}>
           <RootStack.Screen
             name="Main"
             component={MainTabScreen}
@@ -86,6 +94,7 @@ export default function App() {
           <RootStack.Screen
             name="GlobalFilterModal"
             component={GlobalFilterModal} // Nested navigate actions bubble up here
+            options={{ title: 'Filtros' }}
           />
         </RootStack.Navigator>
       </NavigationContainer>

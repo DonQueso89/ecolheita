@@ -26,6 +26,7 @@ import {
 import { addFavorite, removeFavorite } from '../features/user/userSlice.js'
 
 import { Ionicons } from '@expo/vector-icons'
+import SearchAndFilter from '../components/searchAndFilter'
 //import Vendor from '../components/Vendor'
 
 function getNumLeftBadge(props) {
@@ -89,46 +90,11 @@ function Vendor(props) {
   )
 }
 
-function Search(props) {
-  return (
-    <SearchBar
-      placeholder="Nome do comercio"
-      onChangeText={props.setVendorQuery}
-      value={props.vendorQuery}
-      style={props.style}
-      platform="ios"></SearchBar>
-  )
-}
-
-function Offer(props) {
-  /*
-   * thumbnail name distance category rating vendorName price
-   */
-  return (
-    <TouchableOpacity style={props.style}>
-      <Text>{props.name}</Text>
-    </TouchableOpacity>
-  )
-}
-
 function HomeView(props) {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.searchAndFilter}>
-          <SearchBar
-            placeholder="Nome do comercio"
-            onChangeText={props.setVendorQuery}
-            value={props.vendorQuery}
-            containerStyle={{ flex: 7 }}
-            platform="ios"></SearchBar>
-          <Ionicons
-            name="md-options"
-            size={40}
-            style={{ flex: 1, paddingVertical: 17 }}
-            onPress={() => props.navigation.navigate('GlobalFilterModal')}
-          />
-        </View>
+        <SearchAndFilter {...props} />
         <View style={styles.vendorList}>
           <FlatList
             data={
