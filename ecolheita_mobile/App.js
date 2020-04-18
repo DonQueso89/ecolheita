@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeView from './src/containers/HomeView'
 import MiscView from './src/containers/MiscView'
-//import MapView from './src/containers/MapView'
+import MapView from './src/containers/MapView'
 import FavoritesView from './src/containers/FavoritesView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
@@ -33,7 +33,7 @@ function MainTabScreen() {
       />
       <HomeNavTab.Screen
         name="Map"
-        component={HomeView}
+        component={MapView}
         options={{
           title: 'Mapa',
           tabBarIcon: () => <Ionicons name="md-map" size={30} />,

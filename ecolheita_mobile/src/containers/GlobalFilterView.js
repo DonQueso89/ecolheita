@@ -34,8 +34,6 @@ function FilterToggler({ isActive, title, iconName, toggleFunc }) {
 
 function GlobalFilterModal(props) {
   const { groceriesFilter, todayFilter, mealsFilter, pastryFilter } = props
-  console.log('RENDERING')
-  console.log(todayFilter)
   return (
     <View
       style={{
@@ -57,13 +55,13 @@ function GlobalFilterModal(props) {
         </View>
         <View style={Object.assign({ flex: 3 }, styles.filterContainer)}>
           <Text style={{ fontSize: 15, marginHorizontal: 10 }}>
-            Somente mostra cestas para hoje
+            Somente mostra ofertas para hoje
           </Text>
           <Switch
             trackColor={{ false: '#282', true: '#fa5' }}
             thumbColor={todayFilter ? '#282' : '#fa5'}
             ios_backgroundColor={todayFilter ? '#fa5' : '#282'}
-            onValueChange={(newValue) => props.setTodayFilter(newValue)}
+            onValueChange={props.setTodayFilter}
             value={todayFilter}
             style={{ borderWidth: 1 }}
           />
@@ -108,7 +106,7 @@ function GlobalFilterModal(props) {
   )
 }
 
-function mapState(state) {
+const mapState = (state) => {
   const {
     groceriesFilter,
     todayFilter,
@@ -123,16 +121,13 @@ function mapState(state) {
   }
 }
 
-function mapDispatch() {
-  return {
+const mapDispatch = {
     setGroceriesFilter: setGroceriesFilter,
     setPastryFilter: setPastryFilter,
     setMealsFilter: setMealsFilter,
     setTodayFilter: setTodayFilter,
-  }
 }
 
-export default connect(mapState, mapDispatch)(GlobalFilterModal)
 
 const styles = StyleSheet.create({
   filtersContainer: {
@@ -162,3 +157,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 })
+
+export default connect(mapState, mapDispatch)(GlobalFilterModal)

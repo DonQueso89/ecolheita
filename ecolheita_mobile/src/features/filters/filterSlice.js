@@ -3,22 +3,21 @@ import { createSlice } from '@reduxjs/toolkit'
 const filterSlice = createSlice({
   name: 'filters',
   initialState: {
-    groceriesFilter: true,
-    pastryFilter: true,
+    groceriesFilter: false,
+    pastryFilter: false,
     mealsFilter: false,
     todayFilter: false,
   },
   reducers: {
-    setGroceriesFilter: (action, state) =>
-      Object.assign(state, { groceriesFilter: true }),
-    setPastryFilter: (action, state) =>
+    setGroceriesFilter: (state, action) =>
+      Object.assign(state, { groceriesFilter: action.payload }),
+    setPastryFilter: (state, action) =>
       Object.assign(state, { pastryFilter: action.payload }),
-    setMealsFilter: (action, state) =>
+    setMealsFilter: (state, action) =>
       Object.assign(state, { mealsFilter: action.payload }),
-    setTodayFilter: (action, state) => {
-      console.log('ACTION DISPATCHED')
+    setTodayFilter: (state, action) => 
       Object.assign(state, { todayFilter: action.payload })
-    },
+    ,
   },
 })
 
