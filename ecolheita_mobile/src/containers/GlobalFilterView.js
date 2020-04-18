@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 
 import { Ionicons } from '@expo/vector-icons'
 import { View, Text, StyleSheet, Switch, TouchableOpacity } from 'react-native'
-import { Divider, Button } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import {
-  toggleMealsFilter,
-  toggleGroceriesFilter,
-  togglePastryFilter,
-  toggleTodayFilter,
+  setMealsFilter,
+  setGroceriesFilter,
+  setPastryFilter,
+  setTodayFilter,
 } from '../features/filters/filterSlice'
 
 function FilterToggler({ isActive, title, iconName, toggleFunc }) {
@@ -25,27 +25,17 @@ function FilterToggler({ isActive, title, iconName, toggleFunc }) {
         backgroundColor: isActive ? '#282' : null,
         marginHorizontal: 10,
       }}
-      onPress={() => toggleFunc()}>
+      onPress={() => toggleFunc(!isActive)}>
       <Text textAlign="center">{title}</Text>
       <Ionicons name="md-restaurant" size={40} />
     </TouchableOpacity>
   )
 }
 
-function GlobalFilterModal({ navigation }) {
-  const [startTime, setStartTime] = useState(0)
-  const [endTime, setEndTime] = useState(0)
-  const dispatch = useDispatch()
-  const setMealsFilter = () => dispatch(toggleMealsFilter())
-  const setGroceriesFilter = () => dispatch(toggleGroceriesFilter())
-  const setPastryFilter = () => dispatch(togglePastryFilter())
-  const toggleTodayFilter = () => dispatch(toggleTodayFilter())
-
-  const groceriesFilter = useSelector((state) => state.filters.groceriesFilter)
-  const pastryFilter = useSelector((state) => state.filters.pastryFilter)
-  const mealsFilter = useSelector((state) => state.filters.mealsFilter)
-  const todayFilter = useSelector((state) => state.filters.todayFilter)
-
+function GlobalFilterModal(props) {
+  const { groceriesFilter, todayFilter, mealsFilter, pastryFilter } = props
+  console.log('RENDERING')
+  console.log(todayFilter)
   return (
     <View
       style={{
@@ -62,9 +52,8 @@ function GlobalFilterModal({ navigation }) {
             size={32}
             color="green"
             style={{ left: '400%' }}
-            onPress={() => navigation.goBack()}
+            onPress={() => props.navigation.goBack()}
           />
-          <Divider style={{ backgroundColor: '#282', height: 1 }} />
         </View>
         <View style={Object.assign({ flex: 3 }, styles.filterContainer)}>
           <Text style={{ fontSize: 15, marginHorizontal: 10 }}>
@@ -74,7 +63,7 @@ function GlobalFilterModal({ navigation }) {
             trackColor={{ false: '#282', true: '#fa5' }}
             thumbColor={todayFilter ? '#282' : '#fa5'}
             ios_backgroundColor={todayFilter ? '#fa5' : '#282'}
-            onValueChange={toggleTodayFilter}
+            onValueChange={(newValue) => props.setTodayFilter(newValue)}
             value={todayFilter}
             style={{ borderWidth: 1 }}
           />
@@ -85,19 +74,19 @@ function GlobalFilterModal({ navigation }) {
         <View style={Object.assign({ flex: 3 }, styles.filterContainer)}>
           <FilterToggler
             isActive={mealsFilter}
-            toggleFunc={setMealsFilter}
+            toggleFunc={props.setMealsFilter}
             title="Pratos completos"
             iconName="md-restaurant"
           />
           <FilterToggler
             isActive={pastryFilter}
-            toggleFunc={setPastryFilter}
+            toggleFunc={props.setPastryFilter}
             title="Paes e doces"
             iconName="md-pie"
           />
           <FilterToggler
             isActive={groceriesFilter}
-            toggleFunc={setGroceriesFilter}
+            toggleFunc={props.setGroceriesFilter}
             title="Compras"
             iconName="md-basket"
           />
@@ -119,7 +108,31 @@ function GlobalFilterModal({ navigation }) {
   )
 }
 
-export default GlobalFilterModal
+function mapState(state) {
+  const {
+    groceriesFilter,
+    todayFilter,
+    mealsFilter,
+    pastryFilter,
+  } = state.filters
+  return {
+    groceriesFilter: groceriesFilter,
+    pastryFilter: pastryFilter,
+    mealsFilter: mealsFilter,
+    todayFilter: todayFilter,
+  }
+}
+
+function mapDispatch() {
+  return {
+    setGroceriesFilter: setGroceriesFilter,
+    setPastryFilter: setPastryFilter,
+    setMealsFilter: setMealsFilter,
+    setTodayFilter: setTodayFilter,
+  }
+}
+
+export default connect(mapState, mapDispatch)(GlobalFilterModal)
 
 const styles = StyleSheet.create({
   filtersContainer: {
