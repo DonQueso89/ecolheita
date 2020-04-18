@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { dietPrefs } from '../../constants'
+
 
 const filterSlice = createSlice({
   name: 'filters',
@@ -7,6 +9,9 @@ const filterSlice = createSlice({
     pastryFilter: false,
     mealsFilter: false,
     todayFilter: false,
+    diet: dietPrefs.ALL,
+    startTime: 0,
+    endTime: 96
   },
   reducers: {
     setGroceriesFilter: (state, action) =>
@@ -16,7 +21,13 @@ const filterSlice = createSlice({
     setMealsFilter: (state, action) =>
       Object.assign(state, { mealsFilter: action.payload }),
     setTodayFilter: (state, action) => 
-      Object.assign(state, { todayFilter: action.payload })
+      Object.assign(state, { todayFilter: action.payload }),
+    setDiet: (state, action) => 
+      Object.assign(state, { diet: action.payload }),
+    setStartTime: (state, action) => 
+      Object.assign(state, { startTime: action.payload }),
+    setEndTime: (state, action) => 
+      Object.assign(state, { endTime: action.payload })
     ,
   },
 })
@@ -29,4 +40,7 @@ export const {
   setGroceriesFilter,
   setPastryFilter,
   setTodayFilter,
+  setDiet,
+  setStartTime,
+  setEndTime,
 } = actions
