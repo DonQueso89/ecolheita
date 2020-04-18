@@ -73,8 +73,8 @@ function Vendor(props) {
               checked={props.liked}
               right
               containerStyle={{ top: -80, right: -30 }}
-              checkedIcon=<Ionicons name="md-heart" size={30} color="red" />
-              uncheckedIcon=<Ionicons name="md-heart-empty" size={30} />
+              checkedIcon={<Ionicons name="md-heart" size={30} color="red" />}
+              uncheckedIcon={<Ionicons name="md-heart-empty" size={30} />}
               onPress={
                 props.liked
                   ? () => props.onUnlike(props._id)
