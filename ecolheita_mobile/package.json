@@ -6,7 +6,26 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "prettier": "prettier 'src/**/*.js'"
+    "prettier": "prettier 'src/**/*.js'",
+    "test": "jest",
+    "testWatch": "jest --watch --coverage=false --changedSince=origin/master",
+    "testWatchDebug": "jest -o --watch --coverage=false",
+    "test": "jest",
+    "updateSnapshots": "jest -u --coverage=false"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ]
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
@@ -30,7 +49,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@expo/webpack-config": "^0.11.23",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "~8.1.0",
+    "jest-expo": "^37.0.0",
     "prettier": "^2.0.2"
   },
   "private": true,

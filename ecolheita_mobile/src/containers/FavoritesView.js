@@ -1,18 +1,73 @@
 import React from 'react'
-import { View, StyleSheet, Text, FlatList } from 'react-native'
+import { View, StyleSheet, Text, FlatList, CheckBox } from 'react-native'
 
 import { SearchBar, ListItem, Image, Badge, Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
-import Vendor from "components/Vendor"
+import { addFavorite, removeFavite } from '../features/user/userSlice'
 
-
+function Vendor(props) {
+  return (
+    <ListItem
+      rightAvatar={{ source: require('../../assets/favicon-32x32.png') }}
+      bottomDivider
+      topDivider
+      containerStyle={{backgroundColor: "#f5f5f5"}}
+      title={
+        <Text>
+          {props.name} {<Ionicons name="md-clock" />}
+          {props.openFrom + '/' + props.openUntil}
+        </Text>
+      }
+      subtitle={
+        <View>
+          <Image
+            source={require('../../assets/foodbg.jpg')}
+            style={{
+              height: 80,
+              width: 300,
+              borderRadius: 5,
+              resizeMode: 'stretch',
+            }}>
+            <Badge
+              value={props.distance + ' metros'}
+              containerStyle={{ bottom: -30, left: -110 }}
+            />
+            <Badge
+              value={'R$' + props.price}
+              containerStyle={{ bottom: -30, left: -125 }}
+            />
+            <CheckBox
+              checked={props.liked}
+              right
+              containerStyle={{ top: -80, right: -30 }}
+              checkedIcon={<Ionicons name="md-heart" size={30} color="red" />}
+              uncheckedIcon={<Ionicons name="md-heart-empty" size={30} />}
+              onPress={
+                props.liked
+                  ? () => props.onUnlike(props._id)
+                  : () => props.onLike(props._id)
+              }
+            />
+          </Image>
+        </View>
+      }
+      chevron={true}
+      badge={{
+        value: 'Sobram ' + props.numLeft,
+        status: props.numLeft < 3 ? 'error' : props.numLeft < 5 ? 'warning' : 'success',
+        bottom: -20,
+      }}
+    />
+  )
+}
 
 function mapStateToProps(state) {
   const {
     vendors,
     user: { favorites },
   } = state
+
   return {
     favoriteVendors: vendors.data.filter((x) => favorites.includes(x._id)),
   }
@@ -20,10 +75,20 @@ function mapStateToProps(state) {
 
 function FavoritesView({ favoriteVendors }) {
   return favoriteVendors.length ? (
-    <View>
+    <View style={{flex: 1, backgroundColor: "#fa5"}}>
       <FlatList
+        style={{backgroundColor: "#fa5"}}
+        keyExtractor={(item) => String(item._id)}
         data={favoriteVendors}
-        renderItem={({ item }) => <Vendor style={styles.vendor} {...item} />}
+        renderItem={({ item }) => (
+          <Vendor
+            style={styles.vendor}
+            {...item}
+            liked={true}
+            onLike={addFavorite}
+            onUnlike={removeFavite}
+          />
+        )}
       />
     </View>
   ) : (
@@ -48,4 +113,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(mapStateToProps)(FavoritesView)
+const mapDispatch = {
+  addFavorite,
+  removeFavite,
+}
+
+export default connect(mapStateToProps, mapDispatch)(FavoritesView)

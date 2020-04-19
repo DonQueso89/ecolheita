@@ -27,13 +27,11 @@ import { addFavorite, removeFavorite } from '../features/user/userSlice.js'
 
 import { Ionicons } from '@expo/vector-icons'
 import SearchAndFilter from '../components/searchAndFilter'
-//import Vendor from '../components/Vendor'
 
-function getNumLeftBadge(props) {
+function getNumLeftBadge(numLeft) {
   return {
-    value: 'Sobram ' + props.numLeft,
-    status:
-      props.numLeft < 3 ? 'error' : props.numLeft < 5 ? 'warning' : 'success',
+    value: 'Sobram ' + numLeft,
+    status: numLeft < 3 ? 'error' : numLeft < 5 ? 'warning' : 'success',
     bottom: -20,
   }
 }
@@ -44,10 +42,10 @@ function Vendor(props) {
       rightAvatar={{ source: require('../../assets/favicon-32x32.png') }}
       bottomDivider
       topDivider
-      style={props.style}
+      containerStyle={{backgroundColor: "#f5f5f5"}}
       title={
         <Text>
-          {props.name} <Ionicons name="md-clock" />
+          {props.name} {<Ionicons name="md-clock" />}
           {props.openFrom + '/' + props.openUntil}
         </Text>
       }
@@ -85,7 +83,7 @@ function Vendor(props) {
         </View>
       }
       chevron={true}
-      badge={getNumLeftBadge(props)}
+      badge={getNumLeftBadge(props.numLeft)}
     />
   )
 }
@@ -106,6 +104,7 @@ function HomeView(props) {
                   )
                 : props.vendors
             }
+            keyExtractor={(item) => String(item._id)}
             renderItem={({ item }) => (
               <Vendor
                 style={styles.vendor}

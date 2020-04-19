@@ -23,17 +23,21 @@ function ProfileView(props) {
   )
 }
 
-function MiscMainComponent(navItems) {
+function MiscMainComponent(navItemConfigs) {
   return ({ navigation }) => {
-    const entries = navItems.map((name) => (
+    const entries = navItemConfigs.map(({ name, iconName }, index) => (
       <ListItem
+        key={index}
         title={name}
         onPress={() => navigation.navigate(name)}
         bottomDivider
         topDivider
         chevron
         containerStyle={{ height: 80 }}
-        pad={0}
+        pad={20}
+        leftIcon={<Ionicons name={iconName} size={25}/>}
+        containerStyle={{backgroundColor: "#f5f5f5",height: 100}}
+        titleStyle={{fontSize: 20}}
       />
     ))
     return <View style={styles.container}>{entries}</View>
@@ -76,18 +80,19 @@ function Support() {
   )
 }
 
+const navItemConfigs = [
+  { name: 'Perfil', component: Profile, iconName: "md-person" },
+  { name: 'Pedidos', component: Orders, iconName: "md-clipboard" },
+  { name: 'Meios de pagemento', component: Payment, iconName: "ios-cash" },
+  { name: 'Termos Gerais', component: Legal, iconName: "md-information-circle" },
+  { name: 'Ajuda', component: Support, iconName: "md-help" },
+]
+
 const MiscStack = createStackNavigator()
 
 function MiscView(props) {
-  const navItems = [
-    { name: 'Perfil', component: Profile },
-    { name: 'Pedidos', component: Orders },
-    { name: 'Meios de pagemento', component: Payment },
-    { name: 'Termos Gerais', component: Legal },
-    { name: 'Ajuda', component: Support },
-  ]
-  const MiscMain = MiscMainComponent(navItems.map(({ name }) => name))
-  const screens = navItems.map((cfg) => <MiscStack.Screen {...cfg} />)
+  const MiscMain = MiscMainComponent(navItemConfigs)
+  const screens = navItemConfigs.map((cfg) => <MiscStack.Screen {...cfg} />)
   return (
     <MiscStack.Navigator initialRoute="MiscMain">
       <MiscStack.Screen

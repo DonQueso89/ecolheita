@@ -3,11 +3,10 @@ import { ListItem, Badge, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { View, Text, StyleSheet, CheckBox } from 'react-native'
 
-function getNumLeftBadge(props) {
+function getNumLeftBadge(numLeft) {
   return {
-    value: 'Sobram ' + props.numLeft,
-    status:
-      props.numLeft < 3 ? 'error' : props.numLeft < 5 ? 'warning' : 'success',
+    value: 'Sobram ' + numLeft,
+    status: numLeft < 3 ? 'error' : numLeft < 5 ? 'warning' : 'success',
     bottom: -20,
   }
 }
@@ -21,7 +20,7 @@ function Vendor(props) {
       style={props.style}
       title={
         <Text>
-          {props.name} <Ionicons name="md-clock" />
+          {props.name} {<Ionicons name="md-clock" />}
           {props.openFrom + '/' + props.openUntil}
         </Text>
       }
@@ -59,7 +58,7 @@ function Vendor(props) {
         </View>
       }
       chevron={true}
-      badge={getNumLeftBadge(props)}
+      badge={getNumLeftBadge(props.numLeft)}
     />
   )
 }
