@@ -9,7 +9,7 @@ const userSlice = createSlice({
     username: 'Leandro1234',
     email: 'lenadro@negoceki.com',
     phone: '123456789',
-    country: 'Brasil',
+    region: 'Parana',
     favorites: [1, 4],
   },
   reducers: {

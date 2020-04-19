@@ -10,7 +10,6 @@
     "test": "jest",
     "testWatch": "jest --watch --coverage=false --changedSince=origin/master",
     "testWatchDebug": "jest -o --watch --coverage=false",
-    "test": "jest",
     "updateSnapshots": "jest -u --coverage=false"
   },
   "jest": {

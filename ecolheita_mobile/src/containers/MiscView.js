@@ -2,26 +2,15 @@ import React, { useState } from 'react'
 import {
   StyleSheet,
   Text,
-  TextInput,
-  ScrollView,
   View,
-  FlatList,
-  TouchableOpacity,
 } from 'react-native'
 import { SearchBar, ListItem, Image, Badge, Icon } from 'react-native-elements'
 
 import { createStackNavigator } from '@react-navigation/stack'
-import { connect } from 'react-redux'
 
 import { Ionicons } from '@expo/vector-icons'
+import ProfileView from '../components/Profile'
 
-function ProfileView(props) {
-  return (
-    <View>
-      <Text>Aqui se pode fazer configuracoes</Text>
-    </View>
-  )
-}
 
 function MiscMainComponent(navItemConfigs) {
   return ({ navigation }) => {
@@ -44,13 +33,6 @@ function MiscMainComponent(navItemConfigs) {
   }
 }
 
-function Profile() {
-  return (
-    <View>
-      <Text>Aqui se pode fazer configuracoes</Text>
-    </View>
-  )
-}
 function Orders() {
   return (
     <View>
@@ -81,7 +63,7 @@ function Support() {
 }
 
 const navItemConfigs = [
-  { name: 'Perfil', component: Profile, iconName: "md-person" },
+  { name: 'Perfil', component: ProfileView, iconName: "md-person" },
   { name: 'Pedidos', component: Orders, iconName: "md-clipboard" },
   { name: 'Meios de pagemento', component: Payment, iconName: "ios-cash" },
   { name: 'Termos Gerais', component: Legal, iconName: "md-information-circle" },
@@ -92,14 +74,16 @@ const MiscStack = createStackNavigator()
 
 function MiscView(props) {
   const MiscMain = MiscMainComponent(navItemConfigs)
-  const screens = navItemConfigs.map((cfg) => <MiscStack.Screen {...cfg} />)
-  return (
-    <MiscStack.Navigator initialRoute="MiscMain">
+  const screens = navItemConfigs.map((cfg, idx) => <MiscStack.Screen {...cfg} key={idx} />)
+  screens.push(
       <MiscStack.Screen
         name="MiscMain"
         component={MiscMain}
         options={{ headerShown: false }}
-      />
+        key={screens.length}
+  />)
+  return (
+    <MiscStack.Navigator initialRouteName="MiscMain">
       {screens}
     </MiscStack.Navigator>
   )

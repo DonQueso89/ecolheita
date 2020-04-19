@@ -15,7 +15,7 @@ function SearchAndFilter(props) {
       <Ionicons
         name="md-options"
         size={40}
-        style={{ flex: 1, paddingVertical: 17 }}
+        style={{ flex: 1  }}
         onPress={() => props.navigation.navigate('GlobalFilterModal')}
       />
     </View>
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'rgb(245, 245, 245)',
+    alignItems: 'center'
   },
 })
 
