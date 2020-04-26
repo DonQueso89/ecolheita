@@ -4,6 +4,18 @@ import { Button, ListItem } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { update as updateUser } from '../features/user/userSlice'
 import { Ionicons } from '@expo/vector-icons'
+import { TextInput } from 'react-native'
+
+
+function ChangeDataItem(title, value, setItem) {
+  return <View>
+      <TextInput
+        value={value}
+        onChangeText={text => setItem(text)}
+      />
+    </View>
+}
+
 
 function UserDataItem({ title, value }) {
   return (
@@ -11,7 +23,7 @@ function UserDataItem({ title, value }) {
       titleStyle={{ color: 'black', fontSize: 20 }}
       containerStyle={styles.dataItem}
       title={title}
-      rightTitle={value}
+      rightTitle={<Text numberOfLines={1} style={{overflow: 'visible'}}>{value}</Text>}
       rightIcon={<Ionicons name={"md-create"} size={20}/>}
     />
   )
@@ -36,7 +48,7 @@ function ProfileView(props) {
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.sectionHeader}>{title}</Text>
         )}
-        renderItem={(item) => <UserDataItem {...item} />}
+        renderItem={({item}) => <UserDataItem {...item} />}
       />
       <Button
         buttonStyle={{
@@ -73,9 +85,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   sectionHeader: {
-    fontSize: 24,
+    fontSize: 26,
     backgroundColor: '#eee',
     padding: 10,
+    paddingTop: 20
   },
 })
 
