@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { update as updateUser } from '../features/user/userSlice'
 import { Ionicons } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
-import { partial } from 'ramda'
+import R from 'ramda'
 
 function EditDataView({ navigation, route, updateUser }) {
   const [value, updateLocalValue] = useState(route.params.value)
@@ -87,7 +87,7 @@ function UserDataItem({ title, value, goToEditor }) {
 const ProfileStackNavigator = createStackNavigator()
 
 function ProfileMainView({ navigation, ...props }) {
-  const navToEdit = partial(navigation.navigate, ['EditDataView'])
+  const navToEdit = R.partial(navigation.navigate, ['EditDataView'])
   const userData = [
     {
       title: 'Nome',
