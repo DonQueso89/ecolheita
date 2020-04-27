@@ -11,6 +11,7 @@ const userSlice = createSlice({
     phone: '123456789',
     region: 'Parana',
     favorites: [1, 4],
+    allowPushNotifications: false
   },
   reducers: {
     update: (state, action) => Object.assign(state, action.payload),

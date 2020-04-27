@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { SearchBar, ListItem, Image, Badge, Icon } from 'react-native-elements'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { Ionicons } from '@expo/vector-icons'
 import ProfileView from '../components/Profile'
-
 
 function MiscMainComponent(navItemConfigs) {
   return ({ navigation }) => {
@@ -24,9 +19,9 @@ function MiscMainComponent(navItemConfigs) {
         chevron
         containerStyle={{ height: 80 }}
         pad={20}
-        leftIcon={<Ionicons name={iconName} size={25}/>}
-        containerStyle={{backgroundColor: "#f5f5f5",height: 100}}
-        titleStyle={{fontSize: 20}}
+        leftIcon={<Ionicons name={iconName} size={25} />}
+        containerStyle={{ backgroundColor: '#f5f5f5', height: 100 }}
+        titleStyle={{ fontSize: 20 }}
       />
     ))
     return <View style={styles.container}>{entries}</View>
@@ -63,27 +58,36 @@ function Support() {
 }
 
 const navItemConfigs = [
-  { name: 'Perfil', component: ProfileView, iconName: "md-person" },
-  { name: 'Pedidos', component: Orders, iconName: "md-clipboard" },
-  { name: 'Meios de pagemento', component: Payment, iconName: "ios-cash" },
-  { name: 'Termos Gerais', component: Legal, iconName: "md-information-circle" },
-  { name: 'Ajuda', component: Support, iconName: "md-help" },
+  { name: 'Perfil', component: ProfileView, iconName: 'md-person' },
+  { name: 'Pedidos', component: Orders, iconName: 'md-clipboard' },
+  { name: 'Meios de pagemento', component: Payment, iconName: 'ios-cash' },
+  {
+    name: 'Termos Gerais',
+    component: Legal,
+    iconName: 'md-information-circle',
+  },
+  { name: 'Ajuda', component: Support, iconName: 'md-help' },
 ]
 
 const MiscStack = createStackNavigator()
 
 function MiscView(props) {
   const MiscMain = MiscMainComponent(navItemConfigs)
-  const screens = navItemConfigs.map((cfg, idx) => <MiscStack.Screen {...cfg} key={idx} />)
+  const screens = navItemConfigs.map((cfg, idx) => (
+    <MiscStack.Screen {...cfg} key={idx} />
+  ))
   screens.push(
-      <MiscStack.Screen
-        name="MiscMain"
-        component={MiscMain}
-        options={{ headerShown: false }}
-        key={screens.length}
-  />)
+    <MiscStack.Screen
+      name="MiscMain"
+      component={MiscMain}
+      options={{ headerShown: false }}
+      key={screens.length}
+    />
+  )
   return (
-    <MiscStack.Navigator initialRouteName="MiscMain">
+    <MiscStack.Navigator
+      initialRouteName="MiscMain"
+      screenOptions={{ headerTintColor: "#282",headerBackTitleVisible: false, headerStyle: styles.navHeaderStyle, headerTitleStyle: {color: "#000"} }}>
       {screens}
     </MiscStack.Navigator>
   )
@@ -113,5 +117,8 @@ const styles = StyleSheet.create({
   },
   tab: {
     fontSize: 50,
+  },
+  navHeaderStyle: {
+    backgroundColor: '#fa5',
   },
 })
