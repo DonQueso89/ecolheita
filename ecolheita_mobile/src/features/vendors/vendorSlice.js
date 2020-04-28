@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { foodCategories } from '../../constants'
+
 
 const vendorSlice = createSlice({
   name: 'vendors',
@@ -14,6 +16,8 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 5,
+        description: "O italiano maluco vende comidas Italianas e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS
       },
       {
         _id: 1,
@@ -25,6 +29,8 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 8,
+        description: "O frango doido vende comidas com frango e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS
       },
       {
         _id: 2,
@@ -36,6 +42,8 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 11,
+        description: "O pratos e gatos vende comidas com carne de gato e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS
       },
       {
         _id: 3,
@@ -47,6 +55,8 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 2,
+        description: "O restaurante vende comidas doidamente bem e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS
       },
       {
         _id: 4,
@@ -58,6 +68,9 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 3,
+        description: "O Farofa da vovo vende farofa e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS
+
       },
       {
         _id: 5,
@@ -69,6 +82,8 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 3,
+        description: "O Fritissimo vende coisas fritas e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS
       },
       {
         _id: 6,
@@ -80,6 +95,8 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 0,
+        description: "O Sabor do campo vende comida do campo e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.GROCERIES
       },
     ],
     query: '',

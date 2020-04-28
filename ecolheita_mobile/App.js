@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeView from './src/containers/HomeView'
 import MiscView from './src/containers/MiscView'
 import MapView from './src/containers/MapView'
+import OfferDetailView from './src/containers/OfferDetailView'
 import FavoritesView from './src/containers/FavoritesView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
@@ -73,17 +74,9 @@ export default function App() {
           mode="modal"
           initialRouteName="Main"
           screenOptions={{
+            headerTintColor: '#282',
             headerStyle: {
               backgroundColor: '#fa5',
-            },
-            headerTintColor: '#282',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerShown: false,
-            cardStyle: {
-              backgroundColor: 'transparent',
-              opacity: 0.9,
             },
           }}>
           <RootStack.Screen
@@ -94,7 +87,26 @@ export default function App() {
           <RootStack.Screen
             name="GlobalFilterModal"
             component={GlobalFilterModal} // Nested navigate actions bubble up here
-            options={{ title: 'Filtros' }}
+            options={{
+              title: 'Filtros',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerShown: false,
+              cardStyle: {
+                backgroundColor: 'transparent',
+                opacity: 0.9,
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="OfferDetailView"
+            component={OfferDetailView}
+            options={{
+              headerBackTitleVisible: false,
+              title: '',
+              headerStyle: { backgroundColor: '#fa5' },
+            }}
           />
         </RootStack.Navigator>
       </NavigationContainer>

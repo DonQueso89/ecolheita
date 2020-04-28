@@ -1,21 +1,6 @@
-import React, { useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  ScrollView,
-  View,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native'
-import {
-  SearchBar,
-  ListItem,
-  Image,
-  Badge,
-  Icon,
-  CheckBox,
-} from 'react-native-elements'
+import React from 'react'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { ListItem, Image, Badge, CheckBox } from 'react-native-elements'
 import { connect } from 'react-redux'
 import {
   add as addVendors,
@@ -42,7 +27,7 @@ function Vendor(props) {
       rightAvatar={{ source: require('../../assets/favicon-32x32.png') }}
       bottomDivider
       topDivider
-      containerStyle={{backgroundColor: "#f5f5f5"}}
+      containerStyle={{ backgroundColor: '#f5f5f5' }}
       title={
         <Text>
           {props.name} {<Ionicons name="md-clock" />}
@@ -82,7 +67,15 @@ function Vendor(props) {
           </Image>
         </View>
       }
-      chevron={true}
+      chevron={
+        <Ionicons
+          name={'ios-arrow-forward'}
+          size={30}
+          onPress={() => props.navigation.navigate('OfferDetailView', {
+            vendorId: props._id,
+          })}
+        />
+      }
       badge={getNumLeftBadge(props.numLeft)}
     />
   )
@@ -109,6 +102,7 @@ function HomeView(props) {
               <Vendor
                 style={styles.vendor}
                 {...item}
+                navigation={props.navigation}
                 onLike={props.addFavorite}
                 onUnlike={props.removeFavorite}
               />
@@ -120,7 +114,7 @@ function HomeView(props) {
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const favorites = state.user.favorites
   const vendors = state.vendors.data.map((x) =>
     Object.assign({ liked: favorites.includes(x._id) }, x)

@@ -1,18 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { orderStatus } from '../../constants'
 
 const orderSlice = createSlice({
   name: 'orders',
   initialState: {
     data: [
       {
-        status: 'collected',
+        status: orderStatus.COLLECTED,
         offerName: 'farofa XL',
-        vendorName: 'farofa da vovo',
+        vendorId: 0,
       },
       {
-        status: 'pending',
+        status: orderStatus.PAID,
         offerName: 'Spageti louco',
-        vendorName: 'O Italiano maluco',
+        vendorId: 1,
       },
     ],
   },
