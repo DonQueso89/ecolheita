@@ -164,6 +164,17 @@ six = ">=1.2"
 
 [[package]]
 category = "main"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+name = "django-filter"
+optional = false
+python-versions = ">=3.4"
+version = "2.2.0"
+
+[package.dependencies]
+Django = ">=1.11"
+
+[[package]]
+category = "main"
 description = "Adds support for using money and currency fields in django models and forms. Uses py-moneyed as the money implementation."
 name = "django-money"
 optional = false
@@ -752,7 +763,7 @@ python-versions = "*"
 version = "0.1.9"
 
 [metadata]
-content-hash = "0b2e3fba8d9f1a312deb76ac786ba1fc17fb2077d906ec509d3683d5e10feb6a"
+content-hash = "506c0084236a24c0e13e897f0010d39607f83f0c70d5d386709535e4f9be4b4a"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -844,6 +855,10 @@ django-cors-headers = [
 django-extensions = [
     {file = "django-extensions-2.2.9.tar.gz", hash = "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6"},
     {file = "django_extensions-2.2.9-py2.py3-none-any.whl", hash = "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"},
+]
+django-filter = [
+    {file = "django-filter-2.2.0.tar.gz", hash = "sha256:c3deb57f0dd7ff94d7dce52a047516822013e2b441bed472b722a317658cfd14"},
+    {file = "django_filter-2.2.0-py3-none-any.whl", hash = "sha256:558c727bce3ffa89c4a7a0b13bc8976745d63e5fd576b3a9a851650ef11c401b"},
 ]
 django-money = [
     {file = "django-money-1.1.tar.gz", hash = "sha256:06507ac17aa0af548f241838bb0dd646bb5782ff2450be941b040f2857a97c1c"},
