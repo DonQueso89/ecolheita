@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
 
+CURRENCIES = ("BRL",)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,8 +43,13 @@ INSTALLED_APPS = [
     # thirdparty
     "graphene_django",
     "django_extensions",
-    # local
     "corsheaders",
+    "djmoney",
+    # local
+    "accounts",
+    "core",
+    "vendors",
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -103,6 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
+
+
+AUTH_USER_MODEL = "accounts.EcolheitaUser"
 
 
 # Internationalization
