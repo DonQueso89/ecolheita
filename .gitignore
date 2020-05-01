@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+ecolheita_server/media
 
 # Flask stuff:
 instance/
@@ -143,3 +144,5 @@ web-report/
 
 # macOS
 .DS_Store
+
+
