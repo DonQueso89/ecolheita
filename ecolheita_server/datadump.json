@@ -1,1 +1,81 @@
-[{"model": "vendors.vendor", "pk": "5de96f2e-1e55-4884-abe9-c3e64a68aa76", "fields": {"name": "Supermercado Rizolar Vila Rio Branco", "organization": "cd56df60-f6f1-4d58-b65d-416daafc7972", "open_from": "08:30:00", "open_until": "21:00:00", "website": "https://www.rizolar.com.br/", "logo": "logos/logorizolar_zEPuT6j.png", "default_backdrop": "vendor_backdrops/rizoalrorgbackdrop.jpeg"}}, {"model": "vendors.vendor", "pk": "d967d97a-39c4-437e-94b0-8043b64125d7", "fields": {"name": "Restaurante Fog\u00e3o a Lenha", "organization": "5673cae5-c835-41f2-80c8-f1e72f0147ee", "open_from": "10:00:00", "open_until": "15:00:00", "website": "https://www.tripadvisor.nl/Restaurant_Review-g2036441-d19605030-Reviews-Restaurante_Fogao_a_Lenha-Castro_State_of_Parana.html", "logo": "", "default_backdrop": "vendor_backdrops/o-cardapio-no-fogao-a.jpg"}}, {"model": "vendors.offer", "pk": "33b4d1cb-4707-4f8d-9329-5efc39f30a10", "fields": {"name": "Padaria do Rizolar", "vendor": "5de96f2e-1e55-4884-abe9-c3e64a68aa76", "unit_price_currency": "BRL", "unit_price": "8.00", "num_left": 30, "collect_from": "10:00:00", "collect_until": "18:00:00", "backdrop": "offer_backdrops/rizolarbackdrop.jpeg"}}, {"model": "vendors.offer", "pk": "9bd879fe-08c4-4264-9219-1a842bd5a852", "fields": {"name": "Arroz Feijao e quem sabe que mais", "vendor": "d967d97a-39c4-437e-94b0-8043b64125d7", "unit_price_currency": "BRL", "unit_price": "5.00", "num_left": 10, "collect_from": "10:00:00", "collect_until": "15:00:00", "backdrop": ""}}, {"model": "vendors.organization", "pk": "5673cae5-c835-41f2-80c8-f1e72f0147ee", "fields": {"name": "default", "website": "", "logo": ""}}, {"model": "vendors.organization", "pk": "cd56df60-f6f1-4d58-b65d-416daafc7972", "fields": {"name": "Supermercado Rizolar", "website": "https://www.rizolar.com.br/", "logo": "logos/logorizolar.png"}}, {"model": "orders.order", "pk": "281df447-f1aa-4a58-8719-d0609f5d1f69", "fields": {"user": "83ea13a8-7147-4a85-8b12-a7717209faa4", "offer": "9bd879fe-08c4-4264-9219-1a842bd5a852", "quantity": 2, "status": 0, "collected_at": null}}]
+[
+  {
+    "model": "vendors.vendor",
+    "pk": "5de96f2e-1e55-4884-abe9-c3e64a68aa76",
+    "fields": {
+      "name": "Supermercado Rizolar Vila Rio Branco",
+      "organization": "cd56df60-f6f1-4d58-b65d-416daafc7972",
+      "open_from": "08:30:00",
+      "open_until": "21:00:00",
+      "website": "https://www.rizolar.com.br/",
+      "logo": "logos/logorizolar_zEPuT6j.png",
+      "default_backdrop": "vendor_backdrops/rizoalrorgbackdrop.jpeg"
+    }
+  },
+  {
+    "model": "vendors.vendor",
+    "pk": "d967d97a-39c4-437e-94b0-8043b64125d7",
+    "fields": {
+      "name": "Restaurante Fog\u00e3o a Lenha",
+      "organization": "5673cae5-c835-41f2-80c8-f1e72f0147ee",
+      "open_from": "10:00:00",
+      "open_until": "15:00:00",
+      "website": "https://www.tripadvisor.nl/Restaurant_Review-g2036441-d19605030-Reviews-Restaurante_Fogao_a_Lenha-Castro_State_of_Parana.html",
+      "logo": "",
+      "default_backdrop": "vendor_backdrops/o-cardapio-no-fogao-a.jpg"
+    }
+  },
+  {
+    "model": "vendors.offer",
+    "pk": "33b4d1cb-4707-4f8d-9329-5efc39f30a10",
+    "fields": {
+      "name": "Padaria do Rizolar",
+      "vendor": "5de96f2e-1e55-4884-abe9-c3e64a68aa76",
+      "unit_price_currency": "BRL",
+      "unit_price": "8.00",
+      "num_left": 30,
+      "collect_from": "10:00:00",
+      "collect_until": "18:00:00",
+      "backdrop": "offer_backdrops/rizolarbackdrop.jpeg"
+    }
+  },
+  {
+    "model": "vendors.offer",
+    "pk": "9bd879fe-08c4-4264-9219-1a842bd5a852",
+    "fields": {
+      "name": "Arroz Feijao e quem sabe que mais",
+      "vendor": "d967d97a-39c4-437e-94b0-8043b64125d7",
+      "unit_price_currency": "BRL",
+      "unit_price": "5.00",
+      "num_left": 10,
+      "collect_from": "10:00:00",
+      "collect_until": "15:00:00",
+      "backdrop": ""
+    }
+  },
+  {
+    "model": "vendors.organization",
+    "pk": "5673cae5-c835-41f2-80c8-f1e72f0147ee",
+    "fields": { "name": "default", "website": "", "logo": "" }
+  },
+  {
+    "model": "vendors.organization",
+    "pk": "cd56df60-f6f1-4d58-b65d-416daafc7972",
+    "fields": {
+      "name": "Supermercado Rizolar",
+      "website": "https://www.rizolar.com.br/",
+      "logo": "logos/logorizolar.png"
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": "281df447-f1aa-4a58-8719-d0609f5d1f69",
+    "fields": {
+      "user": "1c84c337-5abb-49df-9e4b-352ef1d21554",
+      "offer": "9bd879fe-08c4-4264-9219-1a842bd5a852",
+      "quantity": 2,
+      "status": 0,
+      "collected_at": null
+    }
+  }
+]

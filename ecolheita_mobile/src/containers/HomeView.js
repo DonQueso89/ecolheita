@@ -12,6 +12,25 @@ import { addFavorite, removeFavorite } from '../features/user/userSlice.js'
 
 import { Ionicons } from '@expo/vector-icons'
 import SearchAndFilter from '../components/searchAndFilter'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const ALL_VENDORS_QUERY = gql`
+  {
+    vendors {
+      edges {
+        node {
+          name
+          openFrom
+          openUntil
+          website
+          logo
+          defaultBackdrop
+        }
+      }
+    }
+  }
+`
 
 function getNumLeftBadge(numLeft) {
   return {
@@ -71,9 +90,11 @@ function Vendor(props) {
         <Ionicons
           name={'ios-arrow-forward'}
           size={30}
-          onPress={() => props.navigation.navigate('OfferDetailView', {
-            vendorId: props._id,
-          })}
+          onPress={() =>
+            props.navigation.navigate('OfferDetailView', {
+              vendorId: props._id,
+            })
+          }
         />
       }
       badge={getNumLeftBadge(props.numLeft)}
@@ -83,34 +104,40 @@ function Vendor(props) {
 
 function HomeView(props) {
   return (
-    <>
-      <View style={styles.container}>
-        <SearchAndFilter {...props} />
-        <View style={styles.vendorList}>
-          <FlatList
-            data={
-              props.vendorQuery.length
-                ? props.vendors.filter((x) =>
-                    x.name
-                      .toLowerCase()
-                      .includes(props.vendorQuery.toLowerCase())
-                  )
-                : props.vendors
-            }
-            keyExtractor={(item) => String(item._id)}
-            renderItem={({ item }) => (
-              <Vendor
-                style={styles.vendor}
-                {...item}
-                navigation={props.navigation}
-                onLike={props.addFavorite}
-                onUnlike={props.removeFavorite}
-              />
-            )}
-          />
-        </View>
-      </View>
-    </>
+      <Query query={ALL_VENDORS_QUERY}>
+        {({ loading, error, data }) => {
+          console.log(loading)
+          console.log(error)
+          return (
+            <View style={styles.container}>
+              <SearchAndFilter {...props} />
+              <View style={styles.vendorList}>
+                <FlatList
+                  data={
+                    props.vendorQuery.length
+                      ? props.vendors.filter((x) =>
+                          x.name
+                            .toLowerCase()
+                            .includes(props.vendorQuery.toLowerCase())
+                        )
+                      : props.vendors
+                  }
+                  keyExtractor={(item) => String(item._id)}
+                  renderItem={({ item }) => (
+                    <Vendor
+                      style={styles.vendor}
+                      {...item}
+                      navigation={props.navigation}
+                      onLike={props.addFavorite}
+                      onUnlike={props.removeFavorite}
+                    />
+                  )}
+                />
+              </View>
+            </View>
+          )
+        }}
+      </Query>
   )
 }
 

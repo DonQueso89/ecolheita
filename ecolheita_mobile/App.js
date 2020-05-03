@@ -13,8 +13,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import store from './src/store'
 import GlobalFilterModal from './src/containers/GlobalFilterView'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from '@apollo/react-hooks'
 
 const HomeNavTab = createBottomTabNavigator()
+const graphqlServerUrl = "http://localhost:8080/graphql/"
+
+const client = new ApolloClient({uri: graphqlServerUrl})
 
 function MainTabScreen() {
   return (
@@ -65,6 +70,7 @@ const RootStack = createStackNavigator()
 export default function App() {
   return (
     <Provider store={store}>
+      <ApolloProvider client={client}>
       <NavigationContainer>
         <ImageBackground
           source={require('./assets/logo.png')}
@@ -110,6 +116,7 @@ export default function App() {
           />
         </RootStack.Navigator>
       </NavigationContainer>
+      </ApolloProvider>
     </Provider>
   )
 }
