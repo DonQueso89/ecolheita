@@ -17,10 +17,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from graphene_django.views import GraphQLView
 
 from ecolheita import views
+from core.graphql_schema import schema
 
-urlpatterns = [
-    path("", views.index, name="index"),
-    path("admin/", admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = (
+    [
+        path("", views.index, name="index"),
+        path("admin/", admin.site.urls),
+        path(
+            "graphql/",
+            GraphQLView.as_view(schema=schema, graphiql=True),
+            name="graphql",
+        ),
+    ]
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)
