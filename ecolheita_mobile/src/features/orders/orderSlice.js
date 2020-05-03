@@ -7,19 +7,25 @@ const orderSlice = createSlice({
     data: [
       {
         status: orderStatus.COLLECTED,
-        offerName: 'farofa XL',
-        vendorId: 0,
+        vendorId: 4,
+        quantity: 2,
+        price: 10,
       },
       {
-        status: orderStatus.PAID,
-        offerName: 'Spageti louco',
-        vendorId: 1,
+        status: orderStatus.COLLECTED,
+        vendorId: 0,
+        quantity: 1,
+        price: 15,
       },
     ],
+  },
+  reducers: {
+    insert: (state, action) =>
+      Object.assign(state, { data: [...state.data, action.payload] }),
   },
 })
 
 const { reducer, actions } = orderSlice
 
 export default reducer
-export const { update } = actions
+export const { insert } = actions

@@ -1,6 +1,6 @@
-import React from 'react'
-import MapView from 'react-native-maps'
-import { View, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import MapView, { Marker } from 'react-native-maps'
+import { View, StyleSheet, Text } from 'react-native'
 import SearchAndFilter from '../components/searchAndFilter'
 import { connect } from 'react-redux'
 import {
@@ -8,24 +8,49 @@ import {
   reset as resetVendors,
   setQuery as setVendorQuery,
 } from '../features/vendors/vendorSlice.js'
+import { T } from 'ramda'
 
 function EcolheitaMapView(props) {
+  /*
+  loc from location services
+  otherwise loc from configured region
+  otherwise loc from some sophisticated estimation algo
+  */
+  const [region, setRegion] = useState({
+    latitude: props.initialLatitude,
+    longitude: props.initialLongitude,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.05,
+  })
   return (
     <View style={styles.container}>
       <SearchAndFilter {...props} />
       <MapView
-        style={styles.map}
-        region={{
-          latitude: -24.799791,
-          longitude: -50.0014762,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
-        }}></MapView>
+        style={styles.mapStyle}
+        region={region}
+        onRegionChangeComplete={setRegion}>
+        {props.vendors.map((vendor) => (
+          <Marker
+            key={vendor._id.toString()}
+            coordinate={{
+              latitude: vendor.latitude,
+              longitude: vendor.longitude,
+            }}
+            title={vendor.name + " " + `(sobram ${vendor.numLeft})`}
+            description={vendor.description}
+            onCalloutPress={() =>
+              props.navigation.navigate('OfferDetailView', {
+                vendorId: vendor._id,
+              })
+            }
+          />
+        ))}
+      </MapView>
     </View>
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const favorites = state.user.favorites
   const vendors = state.vendors.data.map((x) =>
     Object.assign({ liked: favorites.includes(x._id) }, x)
@@ -33,6 +58,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     vendors: vendors,
     vendorQuery: state.vendors.query,
+    initialLatitude: state.user.latitude,
+    initialLongitude: state.user.longitude,
   }
 }
 
@@ -50,7 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fa5',
     justifyContent: 'flex-start',
   },
-  map: {
+  mapStyle: {
     flex: 6,
   },
 })

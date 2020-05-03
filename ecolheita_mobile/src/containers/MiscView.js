@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { Ionicons } from '@expo/vector-icons'
 import ProfileView from '../components/Profile'
+import OrdersView from './OrdersView'
 
 function MiscMainComponent(navItemConfigs) {
   return ({ navigation }) => {
@@ -28,13 +29,6 @@ function MiscMainComponent(navItemConfigs) {
   }
 }
 
-function Orders() {
-  return (
-    <View>
-      <Text>Aqui se pode ver uma historia de pedidos e pedir ajuda</Text>
-    </View>
-  )
-}
 function Payment() {
   return (
     <View>
@@ -59,7 +53,7 @@ function Support() {
 
 const navItemConfigs = [
   { name: 'Perfil', component: ProfileView, iconName: 'md-person' },
-  { name: 'Pedidos', component: Orders, iconName: 'md-clipboard' },
+  { name: 'Pedidos', component: OrdersView, iconName: 'md-clipboard' },
   { name: 'Meios de pagemento', component: Payment, iconName: 'ios-cash' },
   {
     name: 'Termos Gerais',

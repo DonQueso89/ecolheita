@@ -11,7 +11,9 @@ const userSlice = createSlice({
     phone: '123456789',
     region: 'Parana',
     favorites: [1, 4],
-    allowPushNotifications: false
+    allowPushNotifications: false,
+    latitude: -24.799791,
+    longitude: -50.0014762,
   },
   reducers: {
     update: (state, action) => Object.assign(state, action.payload),

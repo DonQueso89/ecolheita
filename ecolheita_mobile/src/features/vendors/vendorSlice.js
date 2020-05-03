@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { foodCategories } from '../../constants'
+import { mathMod } from 'ramda'
 
+const northWest = { latitude: -24.777388, longitude: -50.02215 }
+const southEast = { latitude: -24.815412, longitude: -49.984213 }
+const latDelta = northWest.latitude - southEast.latitude
+const lonDelta = southEast.longitude - northWest.longitude
 
 const vendorSlice = createSlice({
   name: 'vendors',
@@ -16,8 +21,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 5,
-        description: "O italiano maluco vende comidas Italianas e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.MEALS
+        description:
+          "O italiano maluco vende comidas Italianas e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
       {
         _id: 1,
@@ -29,8 +37,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 8,
-        description: "O frango doido vende comidas com frango e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.MEALS
+        description:
+          "O frango doido vende comidas com frango e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
       {
         _id: 2,
@@ -42,8 +53,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 11,
-        description: "O pratos e gatos vende comidas com carne de gato e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.MEALS
+        description:
+          "O pratos e gatos vende comidas com carne de gato e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
       {
         _id: 3,
@@ -55,8 +69,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 2,
-        description: "O restaurante vende comidas doidamente bem e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.MEALS
+        description:
+          "O restaurante vende comidas doidamente bem e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
       {
         _id: 4,
@@ -68,9 +85,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 3,
-        description: "O Farofa da vovo vende farofa e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.MEALS
-
+        description:
+          "O Farofa da vovo vende farofa e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
       {
         _id: 5,
@@ -82,8 +101,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 3,
-        description: "O Fritissimo vende coisas fritas e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.MEALS
+        description:
+          "O Fritissimo vende coisas fritas e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.MEALS,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
       {
         _id: 6,
@@ -95,8 +117,11 @@ const vendorSlice = createSlice({
         impression: 'bgPic',
         price: 20,
         numLeft: 0,
-        description: "O Sabor do campo vende comida do campo e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-        category: foodCategories.GROCERIES
+        description:
+          "O Sabor do campo vende comida do campo e lorem ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        category: foodCategories.GROCERIES,
+        latitude: northWest.latitude - Math.random() * latDelta ,
+        longitude: northWest.longitude + Math.random() * lonDelta,
       },
     ],
     query: '',
@@ -106,6 +131,14 @@ const vendorSlice = createSlice({
     reset: (state, action) => [],
     setQuery: (state, action) =>
       Object.assign(state, { query: action.payload }),
+    decrement: (state, action) => {
+      const targetIdx = state.data.findIndex(
+        (x) => x._id === action.payload._id
+      )
+      const target = state.data.splice(targetIdx, 1)[0]
+      target.numLeft -= action.payload.decrement
+      return Object.assign(state, { data: [...state.data, target] })
+    },
   },
 })
 
@@ -113,4 +146,4 @@ const { reducer, actions } = vendorSlice
 
 // Ducks pattern
 export default reducer
-export const { add, reset, setQuery } = actions
+export const { add, reset, setQuery, decrement } = actions

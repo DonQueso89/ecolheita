@@ -52,7 +52,15 @@ function Vendor(props) {
           </Image>
         </View>
       }
-      chevron={true}
+      chevron={
+        <Ionicons
+          name={'ios-arrow-forward'}
+          size={30}
+          onPress={() => props.navigation.navigate('OfferDetailView', {
+            vendorId: props._id,
+          })}
+        />
+      }
       badge={{
         value: 'Sobram ' + props.numLeft,
         status: props.numLeft < 3 ? 'error' : props.numLeft < 5 ? 'warning' : 'success',
@@ -73,7 +81,7 @@ function mapStateToProps(state) {
   }
 }
 
-function FavoritesView({ favoriteVendors }) {
+function FavoritesView({ favoriteVendors, navigation }) {
   return favoriteVendors.length ? (
     <View style={{flex: 1, backgroundColor: "#fa5"}}>
       <FlatList
@@ -84,6 +92,7 @@ function FavoritesView({ favoriteVendors }) {
           <Vendor
             style={styles.vendor}
             {...item}
+            navigation={navigation}
             liked={true}
             onLike={addFavorite}
             onUnlike={removeFavite}
