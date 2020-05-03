@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { View, StyleSheet, Modal, SafeAreaView } from 'react-native'
+import { View, StyleSheet, Modal, SafeAreaView, Alert } from 'react-native'
 import { Card, Text, Divider, Button } from 'react-native-elements'
 import R from 'ramda'
 import { Ionicons } from '@expo/vector-icons'
+import { insert as insertOrder } from '../features/orders/orderSlice'
+import { decrement as decrementNumLeft } from '../features/vendors/vendorSlice'
+import { orderStatus } from '../constants'
 
 const mapState = (state, ownProps) => {
   return R.compose(
@@ -12,9 +15,17 @@ const mapState = (state, ownProps) => {
   )(state.vendors.data)
 }
 
+const mapDispatch = {
+  insertOrder: insertOrder,
+  decrementNumLeft: decrementNumLeft,
+}
+
+
 function PaymentModal({ visible, setVisible, ...props }) {
-  const [quantity, setLocalQuantity] = useState(1)
-  const setQuantity = (v) => { (0 < v && v <= props.numLeft) ? setLocalQuantity(v) : null } 
+  const [quantity, setLocalQuantity] = useState(props.numLeft ? 1 :  0)
+  const setQuantity = (v) => {
+    0 < v && v <= props.numLeft ? setLocalQuantity(v) : null
+  }
   return (
     <SafeAreaView>
       <Modal
@@ -43,20 +54,27 @@ function PaymentModal({ visible, setVisible, ...props }) {
               Seleciona quantidade
             </Text>
             <Divider style={{ backgroundColor: '#000', height: 3 }} />
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 24, marginVertical: 10 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 34 }}
+                style={styles.plusMinus}
                 onPress={() => setQuantity(quantity - 1)}>
                 -
-              </Text>{' '}
-              {quantity}{' '}
-              <Ionicons
-                name="ios-add"
-                size={30}
-                onPress={() => setQuantity(quantity + 1)}
-              />
-            </Text>
+              </Text>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 24,
+                  marginVertical: 10,
+                  marginHorizontal: 20,
+                }}>
+                {quantity}
+              </Text>
+              <Text
+                style={styles.plusMinus}
+                onPress={() => setQuantity(quantity + 1)}>
+                +
+              </Text>
+            </View>
             <Text style={{ fontSize: 16 }}>
               Preco total: R$ {props.price * quantity}
             </Text>
@@ -71,7 +89,19 @@ function PaymentModal({ visible, setVisible, ...props }) {
               buttonStyle={{ backgroundColor: '#282' }}
               titleStyle={{ color: '#fff' }}
               containerStyle={{ width: '80%' }}
-              //onPress={props.navigation.navigate("PaymentModule")}
+              onPress={() => {
+                const order = {
+                  status: orderStatus.PAID,
+                  vendorId: props._id,
+                  price: quantity * props.price,
+                  quantity: quantity,
+                  collectFrom: props.openFrom,
+                  collectUntil: props.openUntil,
+                }
+                props.decrementNumLeft({ _id: props._id, decrement: quantity })
+                props.insertOrder(order)
+                Alert.alert("Pagamento completo!", "Obrigado por seu pedido :)", [{text: 'Nada :)', onPress: () => setVisible(false)}])
+              }}
             />
           </View>
         </View>
@@ -111,7 +141,7 @@ function OfferDetailView(props) {
             backgroundColor: '#282',
           }}
           raised
-          title={'Reserva uma (' + props.numLeft + ' sobrando)'}
+          title={'Reservar (' + props.numLeft + ' sobrando)'}
           onPress={() => setPaymentModalVisible(true)}
         />
       </Card>
@@ -151,6 +181,12 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
   },
+  plusMinus: {
+    fontSize: 34,
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
 })
 
-export default connect(mapState)(OfferDetailView)
+export default connect(mapState, mapDispatch)(OfferDetailView)
